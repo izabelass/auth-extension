@@ -19,7 +19,10 @@ import { Role } from './enums/role.enum';
 import { Policies } from 'src/iam/authorization/decorators/policies.decorator';
 import { FrameworkContributorPolicy } from 'src/iam/authorization/policies/framework-contributor.policy';
 import { OnlyAdminPolicy } from 'src/iam/authorization/policies/only-admin.policy';
+import { Auth } from 'src/iam/decorators/auth.decorator';
+import { AuthType } from 'src/iam/enums/auth-type.enum';
 
+@Auth(AuthType.Bearer, AuthType.ApiKey)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}

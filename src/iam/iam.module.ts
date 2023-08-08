@@ -18,6 +18,7 @@ import { PolicyHandlerStorage } from './authorization/policies/policy-handlers.s
 import { FrameworkContributorPolicyHandler } from './authorization/policies/framework-contributor.policy';
 import { PoliciesGuard } from './authorization/guards/policies/policies.guard';
 import { OnlyAdminPolicyHandler } from './authorization/policies/only-admin.policy';
+import { ApiKeysService } from './authentication/api-keys.service';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { OnlyAdminPolicyHandler } from './authorization/policies/only-admin.poli
     AccessTokenGuard,
     RefreshTokenIdsStorage,
     AuthenticationService,
+    ApiKeysService,
   ],
   controllers: [AuthenticationController],
 })
