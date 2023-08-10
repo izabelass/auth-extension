@@ -29,16 +29,16 @@ export class UsersController {
 
   // @Roles(Role.Admin)
   // @Permissions(Permission.CreateCoffee)
-  @Policies(
-    new FrameworkContributorPolicy(),
-    /** new MinAgePolicy(18), new OnlyAdminPolicy() */
-  )
+  // @Policies(
+  //   new FrameworkContributorPolicy(),
+  //   /** new MinAgePolicy(18), new OnlyAdminPolicy() */
+  // )
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
-  @Policies(new OnlyAdminPolicy())
+  // @Policies(new OnlyAdminPolicy())
   @Get()
   findAll(@ActiveUser() user: ActiveUserData) {
     console.log(user);

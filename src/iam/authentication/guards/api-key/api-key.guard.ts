@@ -10,6 +10,7 @@ import { ActiveUserData } from 'src/iam/interfaces/active-user-data.interface';
 import { ApiKey } from 'src/users/api-keys/entities/api-key.entity/api-key.entity';
 import { Repository } from 'typeorm';
 import { ApiKeysService } from '../../api-keys.service';
+import { Request } from 'express';
 
 @Injectable()
 export class ApiKeyGuard implements CanActivate {
@@ -21,7 +22,7 @@ export class ApiKeyGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const apiKey = 'teste'; //this.extractKeyFromHeader(request);
+    const apiKey = this.extractKeyFromHeader(request);
     if (!apiKey) {
       throw new UnauthorizedException();
     }
@@ -44,8 +45,8 @@ export class ApiKeyGuard implements CanActivate {
     return true;
   }
 
-  // private extractKeyFromHeader(request: Request): string | undefined {
-  //   const [type, key] = request.headers.authorization?.split(' ') ?? [];
-  //   return type === 'ApiKey' ? key : undefined;
-  // }
+  private extractKeyFromHeader(request: Request): string | undefined {
+    const [type, key] = request.headers.authorization?.split(' ') ?? [];
+    return type === 'ApiKey' ? key : undefined;
+  }
 }

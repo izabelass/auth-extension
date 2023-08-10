@@ -13,7 +13,7 @@ export class ApiKey {
   uuid: string;
 
   @ManyToOne((type) => User, (user) => user.apiKeys)
-  user: User; // 👈 relationship with User Entity
+  user: User; // relationship with User Entity
 
   // NOTE: As an exercise, you could create a new entity called "Scope" and establish
   // a Many-to-Many relationship between API Keys and Scopes. With the scopes feature, users
