@@ -19,23 +19,26 @@ import { Role } from './enums/role.enum';
 import { Policies } from 'src/iam/authorization/decorators/policies.decorator';
 import { FrameworkContributorPolicy } from 'src/iam/authorization/policies/framework-contributor.policy';
 import { OnlyAdminPolicy } from 'src/iam/authorization/policies/only-admin.policy';
+import { Auth } from 'src/iam/decorators/auth.decorator';
+import { AuthType } from 'src/iam/enums/auth-type.enum';
 
+@Auth(AuthType.Bearer, AuthType.ApiKey)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   // @Roles(Role.Admin)
   // @Permissions(Permission.CreateCoffee)
-  @Policies(
-    new FrameworkContributorPolicy(),
-    /** new MinAgePolicy(18), new OnlyAdminPolicy() */
-  )
+  // @Policies(
+  //   new FrameworkContributorPolicy(),
+  //   /** new MinAgePolicy(18), new OnlyAdminPolicy() */
+  // )
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
-  @Policies(new OnlyAdminPolicy())
+  // @Policies(new OnlyAdminPolicy())
   @Get()
   findAll(@ActiveUser() user: ActiveUserData) {
     console.log(user);
