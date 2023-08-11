@@ -3,4 +3,5 @@ export enum AuthType {
   ApiKey,
   None,
   Teste,
+  Testando,
 }
